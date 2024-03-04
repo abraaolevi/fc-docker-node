@@ -1,5 +1,6 @@
 const express = require('express')
 const mysql = require('mysql2')
+const getRandomName = require('./names')
 
 const config = {
     host: process.env.DB_HOST,
@@ -8,6 +9,7 @@ const config = {
     database: process.env.DB_DATABASE
 };
 const connection = mysql.createConnection(config)
+connection.query('INSERT INTO people (name) VALUES (?)', getRandomName())
 
 const app = express()
 const port = 3000
